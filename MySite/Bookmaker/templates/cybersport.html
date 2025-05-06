@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetBoom - Киберспорт</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.0/dist/css/uikit.min.css">
+    <!-- UIkit Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.0/dist/css/uikit-icons.min.css">
+    <style>
+        body {
+            background-color: #000000;
+            color: #FFFFFF;
+        }
+        .header {
+            background-color: #1A1919;
+            padding: 15px 0;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .logo span {
+            color: #FFD700;
+        }
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            padding: 10px 15px !important;
+            border-radius: 4px;
+        }
+        .nav-link:hover {
+            background-color: #333;
+        }
+        .auth-buttons .uk-button {
+            margin-left: 10px;
+            color: #fff !important;
+        }
+        .uk-button-primary {
+            background-color: #FF4500;
+        }
+        .uk-button-primary:hover {
+            background-color: #E03E00;
+        }
+        /* Основной контент */
+        .main-content {
+            display: flex;
+            margin-top: 20px;
+        }
+        /* Левая панель */
+        .games-sidebar {
+            width: 250px;
+            margin-right: 20px;
+        }
+        .game-list {
+            margin-top: 15px;
+        }
+        .game-item {
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .game-item:hover, .game-item.active {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .game-item.active {
+            border-left: 3px solid #FF4500;
+        }
+        /* Правая панель */
+        .events-panel {
+            flex: 1;
+        }
+        .events-panel h2{
+            color:#FFFFFF
+        }
+        .tournament-item {
+            margin-bottom: 15px;
+        }
+        .tournament-header {
+            padding: 12px;
+            background-color: #1A1A1A;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .tournament-matches {
+            padding: 10px;
+            display: none;
+        }
+        .match-item {
+            padding: 10px;
+            border-bottom: 1px solid #333;
+        }
+        .match-teams {
+            font-weight: bold;
+        }
+        .match-odds {
+            display: flex;
+            margin-top: 8px;
+        }
+        .odd-value {
+            padding: 5px 10px;
+            margin-right: 10px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+        /* Подвал */
+        .uk-background-secondary {
+            background-color: #1A1919;
+        }
+        .uk-light {
+            color: rgba(255,255,255,0.9);
+        }
+        .social-icons {
+            font-size: 0;
+        }
+        .social-icon {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            margin-right: 10px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .telegram-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFFFFF"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.25 1.58-1.32 5.41-1.87 7.19-.14.45-.41.6-.68.61-.23.01-.58-.11-.86-.21l-2.68-1.05-1.03-.99c-.36-.34-.39-.93-.08-1.32l4.08-4.09.04-.04c.15-.15.35-.23.55-.23.1 0 .18.02.25.04l1.68.56.65.2c.57.19.68.56.63.88z"/></svg>');
+        }
+        .youtube-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFFFFF"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>');
+        }
+        .vk-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23FFFFFF"><path d="M19.915 13.028c-.388-.49-.277-.708 0-1.146.005-.005 3.208-4.431 3.538-5.932l.001-.001c.164-.547 0-.949-.793-.949h-2.624c-.668 0-.976.345-1.141.731 0 0-1.336 3.198-3.226 5.271-.61.599-.892.791-1.225.791-.164 0-.419-.192-.419-.739V5.949c0-.656-.187-.949-.74-.949H9.161c-.419 0-.668.306-.668.591 0 .622.945.765 1.043 2.515v3.797c0 .832-.151.985-.486.985-.892 0-3.057-3.211-4.34-6.886-.259-.713-.512-1.001-1.185-1.001H1.782c-.749 0-.9.345-.9.731 0 .682.892 4.073 4.148 8.553 2.17 3.058 5.226 4.715 8.006 4.715 1.671 0 1.875-.368 1.875-1.001 0-2.922-.151-3.198.686-3.198.388 0 1.056.192 2.616 1.667 1.783 1.749 2.076 2.532 3.074 2.532h2.624c.748 0 1.127-.368.909-1.094-.499-1.527-3.871-4.668-4.023-4.878z"/></svg>');
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="uk-container">
+            <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
+                <div class="uk-navbar-left">
+                    <a class="uk-navbar-item logo" href="/">
+                        <span>Bet</span>Boom
+                    </a>
+                    <ul class="uk-navbar-nav">
+                        <li><a class="nav-link" href="#">Линия</a></li>
+                        <li><a class="nav-link" href="#">Live</a></li>
+                        <li><a class="nav-link" href="/cybersport" style="color: #FF4500 !important;">Киберспорт</a></li>
+                        <li><a class="nav-link" href="#">Спорт 24/7</a></li>
+                        <li><a class="nav-link" href="/bonus">Акции и бонусы</a></li>
+                    </ul>
+                </div>
+                <div class="uk-navbar-right">
+                    <div class="auth-buttons">
+                        <a class="uk-button uk-button-default" href="#">Вход</a>
+                        <a class="uk-button uk-button-primary" href="#">Регистрация</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основное содержимое -->
+    <main class="uk-container main-content">
+        <!-- Левая панель - список игр -->
+        <div class="games-sidebar">
+            <form method="get">
+                <div class="uk-inline uk-width-1-1">
+                    <button class="uk-button, uk-button-primary"  type="submit">Поиск</button>
+                    <input class="uk-input" type="text" name="search" value="{{tournament_search}}" placeholder="Поиск...">
+                </div>
+            </form>
+
+            <div class="game-list">
+                <div class="game-item active">
+                    <div class="uk-flex uk-flex-middle">
+                        <span>CS2</span>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <div class="uk-flex uk-flex-middle">
+                        <span>Dota 2</span>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <div class="uk-flex uk-flex-middle">
+                        <span>League of Legends</span>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <div class="uk-flex uk-flex-middle">
+                        <span>Valorant</span>
+                    </div>
+                </div>
+                <div class="game-item">
+                    <div class="uk-flex uk-flex-middle">
+                        <span>StarCraft II</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Правая панель - события -->
+        <div class="events-panel">
+            <h2>CS2</h2>
+            {% for tournament in tournaments %}
+            <div class="tournament-item">
+                <div class="tournament-header" onclick="toggleMatches(this)">
+                    <div class="uk-flex uk-flex-between uk-flex-middle">
+                        <div>{{tournament.name}}</div>
+                        <span uk-icon="icon: chevron-down"></span>
+                    </div>
+                </div>
+                <div class="tournament-matches">
+                    {% for tournamentGame in tournamentGames %}
+                    {% if tournamentGame.tournament == tournament.id %}
+                    <div class="match-item">
+                        <div class="match-teams">{{tournamentGame.name}}</div>
+                        <div class="match-date">{{tournamentGame.datetime}}</div>
+                        <div class="match-odds">
+                            <div class="odd-value">{{tournamentGame.ratio1}}</div>
+                            <div class="odd-value">{{tournamentGame.ratio2}}</div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="uk-margin-large-top uk-padding uk-background-secondary uk-light">
+        <div class="uk-container">
+            <div class="uk-grid-match uk-child-width-1-3@s" uk-grid>
+                <div>
+                    <h3>BetBoom</h3>
+                    <p>Лучшие коэффициенты и удобные ставки на спорт.</p>
+                </div>
+                <div>
+                    <h3>Контакты</h3>
+                    <p>support@betboom.com<br>+7 (800) 123-45-67</p>
+                </div>
+                <div>
+                    <h3>Наши соцсети</h3>
+                    <div class="social-icons">
+                        <span class="social-icon telegram-icon" title="Telegram"></span>
+                        <span class="social-icon youtube-icon" title="YouTube"></span>
+                        <span class="social-icon vk-icon" title="VK"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.0/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.0/dist/js/uikit-icons.min.js"></script>
+
+    <script>
+        // Функция для раскрытия/скрытия списка матчей
+        function toggleMatches(element) {
+            const matches = element.nextElementSibling;
+            const icon = element.querySelector('span[uk-icon]');
+
+            if (matches.style.display === 'block') {
+                matches.style.display = 'none';
+                icon.setAttribute('uk-icon', 'icon: chevron-down');
+            } else {
+                matches.style.display = 'block';
+                icon.setAttribute('uk-icon', 'icon: chevron-up');
+            }
+        }
+
+        // Выделение выбранной игры
+        document.querySelectorAll('.game-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.game-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
